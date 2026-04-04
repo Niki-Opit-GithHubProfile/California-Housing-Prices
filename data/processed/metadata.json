@@ -1,0 +1,144 @@
+{
+  "run_date_utc": "2026-04-04T08:06:01.653519+00:00",
+  "seed": 42,
+  "raw_data": "../data/raw/housing.csv",
+  "target": "median_house_value",
+  "stratification": {
+    "column": "median_income",
+    "method": "pd.qcut",
+    "bins": [
+      "very_low",
+      "low",
+      "mid",
+      "high",
+      "very_high"
+    ],
+    "test_size": 0.2
+  },
+  "imputation": {
+    "column": "total_bedrooms",
+    "strategy": "median",
+    "value": 433.0
+  },
+  "ratio_features": [
+    "rooms_per_household",
+    "bedrooms_per_room",
+    "population_per_household",
+    "rooms_per_person",
+    "bedrooms_per_household"
+  ],
+  "log_features": [
+    "total_rooms",
+    "total_bedrooms",
+    "population",
+    "households",
+    "median_income",
+    "rooms_per_household",
+    "bedrooms_per_room",
+    "population_per_household",
+    "rooms_per_person",
+    "bedrooms_per_household"
+  ],
+  "outlier_policy": {
+    "method": "row_removal",
+    "bounds": "1st-99th percentile",
+    "thresholds_train": {
+      "longitude": {
+        "p01": -123.2189,
+        "p99": -116.31
+      },
+      "latitude": {
+        "p01": 32.68,
+        "p99": 40.62
+      },
+      "housing_median_age": {
+        "p01": 4.0,
+        "p99": 52.0
+      },
+      "total_rooms": {
+        "p01": 5.031866512900384,
+        "p99": 9.321794694967394
+      },
+      "total_bedrooms": {
+        "p01": 3.58351893845611,
+        "p99": 7.704915080036643
+      },
+      "population": {
+        "p01": 4.465908118654584,
+        "p99": 8.662028277407236
+      },
+      "households": {
+        "p01": 3.4339872044851463,
+        "p99": 7.579566406115929
+      },
+      "median_income": {
+        "p01": 0.7326536817733137,
+        "p99": 2.4503767394656757
+      },
+      "rooms_per_household": {
+        "p01": 1.28415933851725,
+        "p99": 2.412844363205679
+      },
+      "bedrooms_per_room": {
+        "p01": 0.1158186679712442,
+        "p99": 0.34838085878311925
+      },
+      "population_per_household": {
+        "p01": 0.9317533220119143,
+        "p99": 1.8580942146695278
+      },
+      "rooms_per_person": {
+        "p01": 0.503567995842824,
+        "p99": 1.6538505416920877
+      },
+      "bedrooms_per_household": {
+        "p01": 0.6139056022690413,
+        "p99": 1.1726011487272
+      }
+    },
+    "rows": {
+      "train_before": 16512,
+      "train_after": 14425,
+      "test_before": 4128,
+      "test_after": 3575
+    }
+  },
+  "encoding": {
+    "column": "ocean_proximity",
+    "method": "one_hot",
+    "columns": [
+      "ocean_proximity_<1H OCEAN",
+      "ocean_proximity_INLAND",
+      "ocean_proximity_ISLAND",
+      "ocean_proximity_NEAR BAY",
+      "ocean_proximity_NEAR OCEAN"
+    ]
+  },
+  "scaling": {
+    "method": "StandardScaler",
+    "numeric_features": [
+      "longitude",
+      "latitude",
+      "housing_median_age",
+      "total_rooms",
+      "total_bedrooms",
+      "population",
+      "households",
+      "median_income",
+      "rooms_per_household",
+      "bedrooms_per_room",
+      "population_per_household",
+      "rooms_per_person",
+      "bedrooms_per_household"
+    ]
+  },
+  "artifacts": {
+    "train_engineered": "../data/processed/train_engineered.csv",
+    "test_engineered": "../data/processed/test_engineered.csv",
+    "X_train_processed_csv": "../data/processed/X_train_processed.csv",
+    "X_test_processed_csv": "../data/processed/X_test_processed.csv",
+    "y_train_csv": "../data/processed/y_train.csv",
+    "y_test_csv": "../data/processed/y_test.csv",
+    "processed_matrices_npz": "../data/processed/processed_matrices.npz"
+  }
+}
