@@ -149,14 +149,51 @@ This milestone delivers a complete, leakage-safe preprocessing report and reprod
 4. Persist and version the preprocessing object for reuse in training/inference.
 
 ## 9. Reproduction Instructions
-From project root:
 
+### 9.1 Prerequisites
+- Python `3.11` or `3.12`
+- `pip` available from the selected Python installation
+
+### 9.2 Setup (All Devices)
+From project root, create and activate a virtual environment.
+
+macOS / Linux:
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-pip install --upgrade pip
-pip install -r requirements.txt
+python -m pip install --upgrade pip setuptools wheel
+python -m pip install -r requirements.txt
+```
+
+Windows PowerShell:
+```powershell
+py -3 -m venv .venv
+.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip setuptools wheel
+python -m pip install -r requirements.txt
+```
+
+### 9.3 Run the Notebook
+```bash
 jupyter lab
 ```
 
-Run all cells in [notebooks/data_exploration.ipynb](notebooks/data_exploration.ipynb) from top to bottom.
+Open and run all cells in [notebooks/California_housing_analysis.ipynb](notebooks/California_housing_analysis.ipynb) from top to bottom.
+
+### 9.4 First-Run Validation Checklist
+- Kernel is set to the project `.venv`
+- Data file exists at [data/raw/housing.csv](data/raw/housing.csv)
+- No import errors in the first code cell
+- Final summary and model comparison cells execute successfully
+
+### 9.5 Common Fixes
+- If `lightgbm` or `xgboost` installation fails, first upgrade build tooling:
+```bash
+python -m pip install --upgrade pip setuptools wheel
+python -m pip install -r requirements.txt --prefer-binary
+```
+
+- If Jupyter does not show the `.venv` kernel:
+```bash
+python -m ipykernel install --user --name california-housing --display-name "Python (.venv)"
+```
